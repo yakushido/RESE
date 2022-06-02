@@ -21,7 +21,29 @@
             </select>
             <input type="text" name="">
         </form>
+        @if (Route::has('login'))
+                <div>
+                    @auth
+                        <a href="{{ url('/dashboard') }}" >Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" >Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" >Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
     </header>
-    <main></main>
+    <main>
+    @foreach ($items as $item)
+        <div class="card">
+            <img src="{{$item->picture}}">
+            <div>
+                {{$item->name}}
+            </div>
+        </div>
+    @endforeach
+    </main>
 </body>
 </html>
