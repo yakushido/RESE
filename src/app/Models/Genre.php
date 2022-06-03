@@ -13,8 +13,8 @@ class Genre extends Model
         'name'
     ];
 
-    // public function shops()
-    // {
-    //     return $this->hasMany('App\Shop');
-    // }
+    public function shops()
+    {
+        return $this->hasMany('App\Models\Shop');
+    }
 }

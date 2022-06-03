@@ -23,3 +23,4 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/',[ShopController::class,'shops']);
+// Route::post('/',[ShopController::class,'serch'])->name('shops.serch');
