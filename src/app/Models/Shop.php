@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Reservation;
 
 class Shop extends Model
 {
@@ -27,5 +28,10 @@ class Shop extends Model
     public function genre()
     {
         return $this->belongsTo('App\Models\Genre');
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany('App\Models\Reservation');
     }
 }

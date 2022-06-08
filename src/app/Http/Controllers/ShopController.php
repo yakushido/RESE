@@ -10,39 +10,50 @@ use App\Models\Genre;
 class ShopController extends Controller
 {
     
+    
     // 飲食店一覧表示
     public function shops()
     {
         $items = Shop::all();
-        $areas = Area::all();
-        $genres = Genre::all();
-        return view('shop',[
-            'items' => $items,
-            'areas' => $areas,
-            'genres' => $genres]);
+        $areaLists = Area::all();
+        $genreLists = Genre::all();
+
+        return view('shop',compact('items', 'areaLists', 'genreLists'));
     }
 
     // 検索機能
-    // public function serch()
-    // {
-    //     $allArea = $request->input('allArea');
-    //     $allGenre = $request->input('allGenre');
+    public function search(Request $request)
+    {
+        $searchArea = $request->input('searchArea');
+        $searchGenre = $request->input('searchGenre');
+        $searchKeyWord = $request->input('searchKeyWord');
 
-    //     $query = Shop::query();
-    //     $query->join('allArea',function($query) use ($request){
-    //         $query->on('shops.area_id'.'=','areas.id');
-    //     })->join('allGenre',function($query) use ($request){
-    //         $query->on('shops.genre_id'.'=','genres.id');
-    //     });
+        $query = Shop::select('shops.id', 'shops.name', 'shops.detail', 'shops.picture', 'shops.area_id', 'shops.genre_id');
+        $query->join('areas', 'shops.area_id', '=', 'areas.id')
+            ->join('genres', 'shops.genre_id', '=', 'genres.id');
 
-    //     if(!empty($allArea)) {
-    //         $query->where('medium', '=', $allArea);
-    //     }
-    //     if(!empty($allGenre)) {
-    //         $query->where('medium', '=', $allGenre);
-    //     }
+        if(!empty($searchArea)) {
+            $items = $query->where('area_id', '=', $searchArea)->get();
+        }
+        if(!empty($searchGenre)) {
+            $items = $query->where('genre_id', '=', $searchGenre)->get();
+        }
+        if(!empty($searchKeyWord)) {
+            $items = $query->where('shops.name', 'LIKE', '%'.$searchKeyWord.'%')->get();
+        }
 
-    //     $serches = $query->get();
+        $areaLists = Area::all();
+        $genreLists = Genre::all();
 
-    // 飲食店詳細表示
+        return view('shop', compact('items', 'areaLists', 'genreLists'));
+    }
+
+    public function detail(Request $request, $id)
+    {
+        $shop = Shop::find($id);
+        $date = $request->input('date');
+        $time = $request->input('time');
+        $number = $request->input('number');
+        return view('detail', compact('shop', 'date', 'time', 'number'));
+    }
 }

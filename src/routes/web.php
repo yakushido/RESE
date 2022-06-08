@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
+use App\Http\Livewire\Detail;
+use App\Http\Livewire\Test;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +25,5 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/',[ShopController::class,'shops']);
-// Route::post('/',[ShopController::class,'serch'])->name('shops.serch');
+Route::get('/search',[ShopController::class,'search'])->name('shops.search');
+Route::get('/detail/{id}',[ShopController::class,'detail'])->name('shops.detail');

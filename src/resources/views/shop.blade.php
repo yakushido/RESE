@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+@extends('layouts.default')
+@section('shops')
 <style>
     main{
         display:flex;
@@ -30,56 +24,54 @@
         color:black;
     }
 </style>
-<body>
-    <header>
-        <div>
-            <div></div>
-            <div>Rese</div>
-        </div>
-        <!-- <form action="{{route('shops.serch')}}" method="POST">
-            @csrf
-                <select name="allArea">
-                    <option value="" selected disabled>All area</option>
-                    @foreach ($areas as $area)
-                        <option value="areas">{{$area->name}}</option>
-                    @endforeach
-                </select>
-                <select name="allGenre">
-                    <option value="" selected disabled>All genre</option>
-                    @foreach ($genres as $genre)
-                        <option value="genres">{{$genre->name}}</option>
-                    @endforeach
-                </select>
-            <input type="text" name="">
-        </form> -->
-        @if (Route::has('login'))
-                <div>
-                    @auth
-                        <a href="{{ url('/dashboard') }}" >Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" >Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" >Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+    <!-- 検索機能 -->
+    <form action="/search" onchange="submit(this.form)" method="GET" id="form">
+        @csrf
+            <select name="searchArea" id="submit_area">
+                <option value="" selected>All area</option>
+                @foreach ($areaLists as $areaList)
+                    <option value="{{ $areaList['id'] }}">{{ $areaList['name'] }}</option>
+                @endforeach
+            </select>
+            <select name="searchGenre" id="submit_genre">
+                <option value="" selected>All genre</option>
+                @foreach ($genreLists as $genreList)
+                    <option value="{{ $genreList['id'] }}">{{ $genreList['name'] }}</option>
+                @endforeach
+            </select>
+            <input type="search" name="searchKeyWord" placeholder="Search...">
+    </form>
+    <!-- 検索機能終わり -->
+
+        
     </header>
     <main>
         @foreach ($items as $item)
             <div class="card">
-                <img src="{{$item->picture}}">
+                <img src="{{ $item['picture'] }}">
                 <div class="card_content">
-                    <div>{{$item->name}}</div>
+                    <h2>{{ $item['name'] }}</h2>
                     <div class="card_tag">
-                        <p>#{{$item->area->name}}</p>
-                        <p>#{{$item->genre->name}}</p>
+                        <p>#{{ $item['area']['name'] }}</p>
+                        <p>#{{ $item['genre']['name'] }}</p>
                     </div>
-                    <a href="">詳しく見る</a>
+                    <a href="{{ route('shops.detail', ['id' => $item->id ]) }}">詳しく見る</a>
                 </div>
             </div>
         @endforeach
     </main>
-</body>
-</html>
+
+    <script>
+        $(function(){
+            $("#submit_area").change(function(){
+                $("#form").submit();
+            });
+            $("#submit_genre").change(function(){
+                $("#form").submit();
+            });
+        });
+    </script>
+
+@endsection
+
