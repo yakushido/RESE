@@ -1,5 +1,5 @@
 @extends('layouts.default')
-@section('default')
+@section('detail')
 <style>
     main{
         display:flex;
@@ -34,7 +34,7 @@
     </div>
     <div class="reservation_card">
         <h2>予約</h2>
-        <form action="" method="POST">
+        <form action="{{route('reservation.add')}}" method="POST">
         @csrf
             <input type="date" id="submit_date">
             <input type="time" id="submit_time">
@@ -68,9 +68,7 @@
                     <td>{{ $number }}</td>
                 </tr>
             </table>
-            </div>
-                <button>予約する</button>
-            </div>
+            <button>予約する</button>
         </form>
     </div>
 </main>

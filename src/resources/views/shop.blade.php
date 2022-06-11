@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('shops')
 <style>
-    main{
+    .shops{
         display:flex;
         flex-wrap:wrap;
     }
@@ -25,7 +25,6 @@
     }
 </style>
 
-    <!-- 検索機能 -->
     <form action="/search" onchange="submit(this.form)" method="GET" id="form">
         @csrf
             <select name="searchArea" id="submit_area">
@@ -42,14 +41,11 @@
             </select>
             <input type="search" name="searchKeyWord" placeholder="Search...">
     </form>
-    <!-- 検索機能終わり -->
-
-        
-    </header>
-    <main>
+    
+    <div class="shops">
         @foreach ($items as $item)
             <div class="card">
-                <img src="{{ $item['picture'] }}">
+                <img src="{{ $item['picture'] }}" alt="店舗画像">
                 <div class="card_content">
                     <h2>{{ $item['name'] }}</h2>
                     <div class="card_tag">
@@ -60,7 +56,7 @@
                 </div>
             </div>
         @endforeach
-    </main>
+    </div>
 
     <script>
         $(function(){

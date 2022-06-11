@@ -18,7 +18,7 @@ class CreateReservationsTable extends Migration
             $table->integer("number")->nullable(false);
             $table->datetime("datetime")->nullable(false);
             $table->unsignedBigInteger("shop_id");
-            $table->unsignedBigInteger("client_id");
+            $table->unsignedBigInteger("user_id");
             $table->timestamps();
 
             $table  ->foreign("shop_id")
@@ -26,9 +26,9 @@ class CreateReservationsTable extends Migration
                     ->on("shops")
                     ->onDelete("cascade");
 
-            $table  ->foreign("client_id")
+            $table  ->foreign("user_id")
                     ->references("id")
-                    ->on("clients")
+                    ->on("users")
                     ->onDelete("cascade");
         });
     }

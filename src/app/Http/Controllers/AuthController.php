@@ -3,22 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AuthController extends Controller
 {
-    //会員登録ページ取得
-    public function showRegister()
+    public function show()
     {
-
+        return view('register');
     }
-    //会員登録処理
-    public function register()
-    {
 
-    }
-    //会員登録完了ページ取得
-    public function thanks()
+    public function add(Request $request)
     {
-
+        $client_data = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password
+        ]);
+        
+        return view('thanks');
     }
 }

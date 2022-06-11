@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ShopController;
-use App\Http\Livewire\Detail;
-use App\Http\Livewire\Test;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +18,16 @@ use App\Http\Livewire\Test;
 |
 */
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-require __DIR__.'/auth.php';
-
-
 
 Route::get('/',[ShopController::class,'shops']);
 Route::get('/search',[ShopController::class,'search'])->name('shops.search');
 Route::get('/detail/{id}',[ShopController::class,'detail'])->name('shops.detail');
+
+Route::post('/reservation/add',[ReservationController::class,'add'])->name('reservation.add');
+
+Route::get('/register',[AuthController::class,'show'])->name('resister.show');
+Route::post('/register/add',[AuthController::class,'add'])->name('register.add');
+
+Route::get('/login',[UserController::class,'show'])->name('login.show');
+Route::post('/login',[UserController::class,'login'])->name('login');
+Route::get('/mypage',[UserController::class,'mypage'])->name('mypage');
