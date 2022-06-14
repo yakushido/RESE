@@ -18,19 +18,17 @@ use App\Http\Controllers\UserController;
 |
 */
 
-
 Route::get('/',[ShopController::class,'shops']);
 Route::get('/search',[ShopController::class,'search'])->name('shops.search');
 Route::get('/detail/{id}',[ShopController::class,'detail'])->name('shops.detail');
 
 Route::post('/reservation/add',[ReservationController::class,'add'])->name('reservation.add');
 
-// Route::get('/registerpage',[AuthController::class,'show'])->name('resisterpage');
+
+// Route::get('/register',[AuthController::class,'show'])->name('resister');
 // Route::post('/register/add',[AuthController::class,'add'])->name('register.add');
 
 // Route::get('/loginpage',[UserController::class,'show'])->name('loginpage');
 // Route::post('/login',[UserController::class,'boot'])->name('login');
-// Route::get('/home',[UserController::class,'home'])->name('home');
-Route::get('/home', function () {
-    dd('ログイン成功');
-})->middleware('auth');
+Route::get('/home',[UserController::class,'home'])->name('home');
+

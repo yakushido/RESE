@@ -1,18 +1,25 @@
 @extends('layouts.default')
 @section('register')
 <div>
-    <form action="/register" method="POST">
+    <form action="{{ route('register') }}" method="POST">
     @csrf
         <div>
-            <span>NAME</span><input type="text" name="name">
+            <label>ユーザ名</label>
+            <input type="text" name="name">
         </div>
         <div>
-            <span>EMAIL</span><input type="email" name="email">
+            <label>メールアドレス</label>
+            <input type="email" name="email">
         </div>
         <div>
-            <span>PASSWORD</span><input type="text" name="password">
+            <label>パスワード</label>
+            <input type="password" name="password">
         </div>
-        <button>登録</button>
+        <div>
+            <label>パスワード確認</label>
+            <input name="password_confirmation" type="password"/>
+        </div>
+        <button type="submit">登録</button>
     </form>
 </div>
 @endsection
