@@ -96,7 +96,7 @@
         <ul class="mask-menu__lists">
             <li><a href="/">Home</a></li>
             <li><a href="/register">Registration</a></li>
-            <li><a href="{{ route('login.show') }}">Login</a></li>
+            <li><a href="/login">Login</a></li>
         </ul>
     </div>
     <div>

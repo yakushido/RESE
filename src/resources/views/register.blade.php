@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('register')
 <div>
-    <form action="{{ route('register.add') }}" method="POST">
+    <form action="/register" method="POST">
     @csrf
         <div>
             <span>NAME</span><input type="text" name="name">

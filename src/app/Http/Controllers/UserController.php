@@ -6,53 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Fortify;
 
 class UserController extends Controller
 {
-    public function show()
-    {
-        return view('login');
-    }
-
-    // public function login(Request $request)
+    // public function show()
     // {
-    //     $email = $request->email;
-    //     $password = $request->password;
-
-    //     if(Auth::attempt(['email' => $email, 'password' => $password])){
-    //         return view('mypage');
-    //     }else{
-    //         return view('login');
-    //     }
+    //     return view('login');
     // }
 
-    public function mypage()
+    public function home()
     {
-        view('mypage');
+        return view('home');
     }
-
-
-    public function login(Request $request)
-    {
-
-        $credentials = $request->only('email', 'password');
-        dd(Auth::attempt($credentials));
-
-        if (Auth::attempt($credentials)){
-            $request->session()->regenerate();
-
-            return route('mypage');
-        }
-
-        return back()->withErrors([
-            'login_error' => 'メールアドレスかパスワードが間違っています。',
-        ]);
-    } 
     
-    public function logout(Request $request)
-    {
-        session()->forget('name');
-        session()->forget('email');
-        return redirect(url('/'));
-    }  
+    // public function logout(Request $request)
+    // {
+    //     session()->forget('name');
+    //     session()->forget('email');
+    //     return redirect(url('/'));
+    // }  
 }

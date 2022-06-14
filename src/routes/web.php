@@ -25,9 +25,12 @@ Route::get('/detail/{id}',[ShopController::class,'detail'])->name('shops.detail'
 
 Route::post('/reservation/add',[ReservationController::class,'add'])->name('reservation.add');
 
-Route::get('/register',[AuthController::class,'show'])->name('resister.show');
-Route::post('/register/add',[AuthController::class,'add'])->name('register.add');
+// Route::get('/registerpage',[AuthController::class,'show'])->name('resisterpage');
+// Route::post('/register/add',[AuthController::class,'add'])->name('register.add');
 
-Route::get('/login',[UserController::class,'show'])->name('login.show');
-Route::post('/login',[UserController::class,'login'])->name('login');
-Route::get('/mypage',[UserController::class,'mypage'])->name('mypage');
+// Route::get('/loginpage',[UserController::class,'show'])->name('loginpage');
+// Route::post('/login',[UserController::class,'boot'])->name('login');
+// Route::get('/home',[UserController::class,'home'])->name('home');
+Route::get('/home', function () {
+    dd('ログイン成功');
+})->middleware('auth');

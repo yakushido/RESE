@@ -8,13 +8,13 @@
     </div>
 @endif
 
-    <form action="{{ route('login') }}" method="POST">
+    <form action="/login" method="POST">
     @csrf
         <div>
             <span>EMAIL</span><input type="email" name="email">
         </div>
         <div>
-            <span>PASSWORD</span><input type="text" name="password">
+            <span>PASSWORD</span><input type="password" name="password">
         </div>
         <button>ログイン</button>
     </form>
