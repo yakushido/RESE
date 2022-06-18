@@ -5,6 +5,7 @@ use App\Http\Controllers\ShopController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FavoriteController;
 
 
 /*
@@ -20,15 +21,19 @@ use App\Http\Controllers\UserController;
 
 Route::get('/',[ShopController::class,'shops']);
 Route::get('/search',[ShopController::class,'search'])->name('shops.search');
-Route::get('/detail/{id}',[ShopController::class,'detail'])->name('shops.detail');
+Route::get('/detail/{shop_id}',[ShopController::class,'detail'])->name('shops.detail');
 
-Route::post('/reservation/add',[ReservationController::class,'add'])->name('reservation.add');
-
+Route::group(['middleware'=>'auth'],function () {
+Route::post('/reservation/{shop_id}',[ReservationController::class,'add'])->name('reservation.add');
+Route::get('/home',[UserController::class,'home'])->name('home');
+Route::post('/favorite/add/{shop_id}',[FavoriteController::class,'add'])->name('favorite.add');
+Route::post('/favorite/delete/{id}',[ReservationController::class,'delete'])->name('reservation.delete');
+});
 
 // Route::get('/register',[AuthController::class,'show'])->name('resister');
 // Route::post('/register/add',[AuthController::class,'add'])->name('register.add');
 
 // Route::get('/loginpage',[UserController::class,'show'])->name('loginpage');
 // Route::post('/login',[UserController::class,'boot'])->name('login');
-Route::get('/home',[UserController::class,'home'])->name('home');
 
+Route::get('/done',[ReservationController::class,'done']);

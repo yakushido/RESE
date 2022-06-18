@@ -11,9 +11,10 @@ class Reservation extends Model
 
     protected $fillable = [
         'number',
-        'datetime',
+        'date',
+        'time',
         'shop_id',
-        'client_id'
+        'user_id'
     ];
 
     public function shop()
@@ -21,7 +22,7 @@ class Reservation extends Model
         return $this->belongsTo('App\Models\Shop');
     }
 
-    public function client()
+    public function user()
     {
         return $this->belongsTo('App\Models\User');
     }

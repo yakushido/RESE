@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
+use App\Models\Reservation;
 
 class ShopController extends Controller
 {
@@ -48,12 +49,12 @@ class ShopController extends Controller
         return view('shop', compact('items', 'areaLists', 'genreLists'));
     }
 
-    public function detail(Request $request, $id)
+    public function detail($shop_id)
     {
-        $shop = Shop::find($id);
-        $date = $request->input('date');
-        $time = $request->input('time');
-        $number = $request->input('number');
-        return view('detail', compact('shop', 'date', 'time', 'number'));
+        $shop = Shop::find($shop_id);
+
+        $items = Reservation::where('shop_id', $shop_id)->get();
+        // dd($item);
+        return view('detail', compact('shop', 'items'));
     }
 }

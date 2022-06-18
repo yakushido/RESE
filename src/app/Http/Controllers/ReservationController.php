@@ -4,26 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
 
-    public function add(Request $request, $id)
+    public function add(Request $request)
     {
-        $items = $request->all();
-        $items['datetime'] = $request->date .' '. $request->time;
-
-        $query = Reservation::select('reservations.id', 'reservations.name', 'reservations.detail', 'reservations.picture', 'reservations.area_id', 'reservations.genre_id');
-        $query->join('shops', 'reservations.shop_id', '=', 'shops.id')
-            ->join('clients', 'reservations.client_id', '=', 'clients.id');
-
+        // dd(Auth::user()->id);
         Reservation::create([
-            'number' => $request->input('number'),
-            'datetime' => $items[ 'datetime' ],
-            'shop_id' => $items[ 'shop_id' ],
-            'client_id' => $items[ 'client_id' ]
+            'number' => $request->number,
+            'date' => $request->date,
+            'time' => $request->time,
+            'shop_id' => $request->shop_id,
+            'user_id' => Auth::id()
         ]);
 
+        return redirect('/done');
+    }
+
+    public function done()
+    {
         return view('done');
+    }
+
+    public function delete($id)
+    {
+        Reservation::where('id', $id)->delete();
+        return redirect()->back();
     }
 }
