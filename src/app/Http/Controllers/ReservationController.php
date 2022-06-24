@@ -11,7 +11,6 @@ class ReservationController extends Controller
 
     public function add(Request $request)
     {
-        // dd(Auth::user()->id);
         Reservation::create([
             'number' => $request->number,
             'date' => $request->date,
@@ -32,5 +31,22 @@ class ReservationController extends Controller
     {
         Reservation::where('id', $id)->delete();
         return redirect()->back();
+    }
+
+    public function show($id)
+    {
+        $items = Reservation::where('id',$id)->get();
+        return view('update', compact('items'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $upadate_data = Reservation::find($id);
+        $upadate_data->date = $request->input('date');
+        $upadate_data->time = $request->input('time');
+        $upadate_data->number = $request->input('number');
+        $upadate_data->save();
+        return view('update_done');
+
     }
 }

@@ -1,7 +1,9 @@
 @extends('layouts.default')
-@section('thanks')
-<div>
-    <h2>会員登録ありがとうございます</h2>
-    <button><a href="{{ route('login.show') }}">ログインする</a></button>
+@section('contents')
+<div class="thanks">
+    <div>
+        <h2>会員登録ありがとうございます</h2>
+        <button><a href="/login">ログインする</a></button>
+    </div>
 </div>
 @endsection

@@ -12,11 +12,6 @@ use Laravel\Fortify\Fortify;
 
 class UserController extends Controller
 {
-    // public function show()
-    // {
-    //     return view('login');
-    // }
-
     public function home()
     {
         $items = Reservation::where('user_id', Auth::id())->get();
@@ -24,11 +19,4 @@ class UserController extends Controller
 
         return view('home', compact('items','favorites'));
     }
-    
-    // public function logout(Request $request)
-    // {
-    //     session()->forget('name');
-    //     session()->forget('email');
-    //     return redirect(url('/'));
-    // }  
 }

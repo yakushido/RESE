@@ -7,6 +7,8 @@ use App\Models\Shop;
 use App\Models\Area;
 use App\Models\Genre;
 use App\Models\Reservation;
+use App\Models\Favorite;
+use Illuminate\Support\Facades\Auth;
 
 class ShopController extends Controller
 {
@@ -18,8 +20,12 @@ class ShopController extends Controller
         $items = Shop::all();
         $areaLists = Area::all();
         $genreLists = Genre::all();
-
-        return view('shop',compact('items', 'areaLists', 'genreLists'));
+        if( Auth::check() ){
+            $favorites = Favorite::where('user_id', Auth::id())->get();
+            return view('shop',compact('items', 'areaLists', 'genreLists', 'favorites'));
+        }else{
+            return view('shop',compact('items', 'areaLists', 'genreLists'));
+        }
     }
 
     // 検索機能
@@ -54,7 +60,6 @@ class ShopController extends Controller
         $shop = Shop::find($shop_id);
 
         $items = Reservation::where('shop_id', $shop_id)->get();
-        // dd($item);
         return view('detail', compact('shop', 'items'));
     }
 }

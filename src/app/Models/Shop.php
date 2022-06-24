@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Shop extends Model
 {
@@ -34,5 +35,27 @@ class Shop extends Model
     public function favorites()
     {
         return $this->hasMany('App\Models\Favorite');
+    }
+
+    public function managers()
+    {
+        return $this->hasMany('App\Models\Manager');
+    }
+
+    public function is_liked_by_auth_user()
+    {
+        $id = Auth::id();
+
+        $likers = array();
+        
+        foreach($this->favorites as $favorite) {
+            array_push($likers, $favorite->user_id);
+        }
+
+        if (in_array($id, $likers)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
