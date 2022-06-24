@@ -2,7 +2,7 @@
 .register{
     border-radius:5px 5px;
     box-shadow: 1px 1px 5px black;
-    width:300px;
+    width:400px;
     margin:50px auto;
 }
 .register>h2{
@@ -37,5 +37,8 @@
     border:none;
     padding:5px 20px;
     margin-left: 70%;
+}
+.message{
+    margin: 5px 0 5px 25px;
 }
 /* 登録終わり */

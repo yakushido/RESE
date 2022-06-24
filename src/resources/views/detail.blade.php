@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('contents')
+<link rel="stylesheet" href="{{ asset('css\detail.css') }}">
 <div class="detail_page">
     <div class="detail">
         <div>
@@ -22,7 +23,13 @@
         <form action="{{ route('reservation.add',['shop_id' => $shop['id'] ]) }}" method="POST">
         @csrf
             <div>
+                @if($errors->has('date'))
+                    <p class="message">{{$errors -> first('date')}}</p>
+                @endif
                 <input type="date" name="date">
+                @if($errors->has('time'))
+                    <p class="message">{{$errors -> first('time')}}</p>
+                @endif
                 <select name="time" id="submit_time">
                     <option value="17:00">17:00</option>
                     <option value="18:00">18:00</option>
@@ -31,6 +38,9 @@
                     <option value="21:00">21:00</option>
                     <option value="22:00">22:00</option>
                 </select>
+                @if($errors->has('number'))
+                    <p class="message">{{$errors -> first('number')}}</p>
+                @endif
                 <select name="number" id="submit_number">
                     <option value="1">1人</option>
                     <option value="2">2人</option>

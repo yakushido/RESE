@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('contents')
+<link rel="stylesheet" href="{{ asset('css\shop.css') }}">
 <!-- 検索機能 -->
 <div class="search">
     <form action="/search" onchange="submit(this.form)" method="GET" id="form">

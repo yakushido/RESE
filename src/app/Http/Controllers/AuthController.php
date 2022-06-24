@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -12,7 +13,7 @@ class AuthController extends Controller
         return view('register');
     }
 
-    public function add(Request $request)
+    public function add(UserRequest $request)
     {
         $client_data = User::create([
             'name' => $request->name,

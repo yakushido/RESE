@@ -45,6 +45,10 @@
     margin:20px; 
     color:#FFFFFF;
 }
+.message{
+    color: #FFFFFF;
+    margin:0 0 5px 20px;
+}
 .reservation>form>div>input{
     height:25px;
     border:none;

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
 {
 
-    public function add(Request $request)
+    public function add(ReservationRequest $request)
     {
         Reservation::create([
             'number' => $request->number,

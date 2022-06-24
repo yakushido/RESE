@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('contents')
-
+<link rel="stylesheet" href="{{ asset('css\update.css') }}">
 <div class="update">
 @foreach($items as $item)
     <div class="update_detail">

@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('contents')
+<link rel="stylesheet" href="{{ asset('css\home.css') }}">
 <div class="home">
     <h1>{{ Auth::user()->name }}さん</h1>
     <div class="home_cards">
